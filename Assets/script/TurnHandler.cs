@@ -21,8 +21,10 @@ public class TurnHandler : MonoBehaviour
         player = GetComponent<GameObject>();
         enemy = GetComponent<GameObject>();
 
-        isEnemyTurn = false; enemy_timer_value = 10;
-        isYourTurn = false; your_timer_value = 10;
+        isEnemyTurn = false;
+        enemy_timer_value = 10;
+        isYourTurn = false;
+        your_timer_value = 10;
 
         your_timer = GetComponent<Text>();
         enemy_timer = GetComponent<Text>();
@@ -31,20 +33,12 @@ public class TurnHandler : MonoBehaviour
         your_timer_text = your_timer.text;
 
         FlipTheCoin();
- 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void FlipTheCoin()
-    {
-        Debug.Log(coin + "");
-        coin = Random.Range(0, 1);
-        if (coin == 0)
+        /*if (coin == 0)
         {
             isEnemyTurn = true;
             Debug.Log("enemy turn " + isEnemyTurn);
@@ -56,6 +50,25 @@ public class TurnHandler : MonoBehaviour
             Debug.Log("enemy turn " + isYourTurn);
             IsYourTurn();
         }
+        */
+    }
+
+    public void FlipTheCoin()
+    {
+        Debug.Log(coin + "");
+        coin = Random.Range(0, 2);
+        if (coin == 0)
+        {
+            isEnemyTurn = true;
+            Debug.Log("enemy turn " + isEnemyTurn);
+            //EnemyTurnIsUp();
+        }
+        else
+        {
+            isYourTurn = true;
+            Debug.Log("enemy turn " + isYourTurn);
+            //IsYourTurn();
+        }
     }
 
     public void EnemyTurnIsUp()
@@ -63,11 +76,18 @@ public class TurnHandler : MonoBehaviour
         if (isEnemyTurn) {
             enemy_timer_value -= 1 * Time.deltaTime;
             enemy_timer.text = enemy_timer_text + (int) enemy_timer_value;
+            
             // implements logic to play
             if (enemy_timer_value == 0)
             {
+                enemy_timer_value = 0;
+                enemy_timer.text = enemy_timer_text + (int)enemy_timer_value;
                 isEnemyTurn = false;
                 isYourTurn = true;
+                if (isYourTurn)
+                {
+                    IsYourTurn();
+                }
             }
         }
     }
@@ -78,11 +98,18 @@ public class TurnHandler : MonoBehaviour
         {
             your_timer_value -= 1 * Time.deltaTime;
             your_timer.text = your_timer_text + (int)your_timer_value;
+            
             // implements logic to play
             if (your_timer_value == 0)
             {
+                your_timer_value = 0;
+                your_timer.text = your_timer_text + (int)your_timer_value;
                 isEnemyTurn = true;
                 isYourTurn = false;
+                if (!isYourTurn)
+                {
+                    EnemyTurnIsUp();
+                }
             }
         }
     }
