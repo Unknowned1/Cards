@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    bool isMyturn_var;
+    public bool isMyturn_var;
     int timer;
 
 
@@ -13,17 +13,17 @@ public class Player : MonoBehaviour
     void Start()
     {
         isMyturn_var = GameObject.Find("coin").GetComponent<Coin>().player_turn;
-
-        if (isMyturn_var)
-        {
-            IsMyTurn();
-        }
+        Debug.Log(isMyturn_var + " from Player script");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        isMyturn_var = GameObject.Find("coin").GetComponent<Coin>().player_turn;
+        if (isMyturn_var == true)
+        {
+            IsMyTurn();
+        }
     }
 
     public void IsMyTurn() {

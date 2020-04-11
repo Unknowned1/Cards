@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    bool isEnemyturn_var;
+    public bool isEnemyturn_var;
     int timer;
 
     // Start is called before the first frame update
@@ -22,6 +22,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isEnemyturn_var = GameObject.Find("coin").GetComponent<Coin>().enemy_turn;
+        if (isEnemyturn_var == true)
+        {
+            IsEnemyTurn();
+        }
         // if is enemy turn, IsEnemyTurn
     }
 

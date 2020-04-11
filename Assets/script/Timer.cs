@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    Text player_timer_txt, enemy_timer_txt;
+    /*public Text player_timer_txt, enemy_timer_txt;
     string player_timer_str, enemy_timer_str;
 
     int player_timer_value, enemy_timer_value;
@@ -33,4 +33,5 @@ public class Timer : MonoBehaviour
     public void UpdateTimer() {
         Debug.Log("Updating timers ...");
     }
+    */
 }
