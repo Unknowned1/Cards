@@ -46,7 +46,6 @@ public class Player_Timer1 : MonoBehaviour
         yield return new WaitForSeconds(10);
         isPlayerTurn = true;
         startPlayerTimer();
-        
     }
 
     public void startPlayerTimer()
@@ -56,7 +55,10 @@ public class Player_Timer1 : MonoBehaviour
             Debug.Log("player timer has started ");
             decreaseTimer();
         }
-       
+        else {
+            player_timer_txt.text = "Timer = 10" ;
+        }
+
     }
 
     public void decreaseTimer()
@@ -66,12 +68,11 @@ public class Player_Timer1 : MonoBehaviour
         {
             player_timer_value -= 1 * Time.deltaTime;
             player_timer_txt.text = player_timer_str + (int)player_timer_value;
-
         }
-        if (player_timer_value == 0)
+        else if (player_timer_value <= 0)
         {
             player_timer_value = 10;
-            player_timer_txt.text = player_timer_str + 10;
+            player_timer_txt.text = player_timer_str + player_timer_value;
             isPlayerTurn = false;
             isEnemyTurn = true;
         }

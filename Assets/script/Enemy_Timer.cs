@@ -26,9 +26,7 @@ public class Enemy_Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // include an if
         isEnemyTurn = GameObject.Find("coin").GetComponent<Coin>().enemy_turn; // sennò non legge la variabile il bastardo
-        //startEnemyTimer();
         if (isEnemyTurn)
         {
             Debug.Log("enemy timer has started ");
@@ -37,17 +35,14 @@ public class Enemy_Timer : MonoBehaviour
         else
         {
             StartCoroutine("WaitYourTurn");
-            
         }
     }
 
     IEnumerator WaitYourTurn()
     {
-        
         yield return new WaitForSeconds(10);
         isEnemyTurn = true;
         startEnemyTimer();
-        
     }
 
     public void startEnemyTimer()
@@ -59,7 +54,7 @@ public class Enemy_Timer : MonoBehaviour
         }
         else
         {
-            StartCoroutine("WaitYourTurn");
+            enemy_timer_txt.text = "Timer = 10";
         }
     }
 
@@ -71,10 +66,10 @@ public class Enemy_Timer : MonoBehaviour
             enemy_timer_value -= 1 * Time.deltaTime;
             enemy_timer_txt.text = enemy_timer_str + (int)enemy_timer_value;
         }
-        if (enemy_timer_value == 0 )
+        else if (enemy_timer_value <= 0 )
         {
             enemy_timer_value = 10;
-            enemy_timer_txt.text = enemy_timer_str + 10;
+            enemy_timer_txt.text = enemy_timer_str + enemy_timer_value;
             isPlayerTurn = true;
             isEnemyTurn = false;
         }
