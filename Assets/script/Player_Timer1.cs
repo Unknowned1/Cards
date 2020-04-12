@@ -8,6 +8,7 @@ public class Player_Timer1 : MonoBehaviour
     public string player_timer_str;
     public float player_timer_value;
     public bool isPlayerTurn, isEnemyTurn;
+    private float timer_stop;
 
     // Start is called before the first frame update
     void Start()
@@ -15,10 +16,12 @@ public class Player_Timer1 : MonoBehaviour
         player_timer_txt = GetComponent<Text>();
         player_timer_str = player_timer_txt.text;
         player_timer_value = 10;
+        timer_stop = 10;
         player_timer_txt.text = player_timer_str + (int)player_timer_value;
-
+        
         isPlayerTurn = GameObject.Find("coin").GetComponent<Coin>().player_turn;
         isEnemyTurn = GameObject.Find("coin").GetComponent<Coin>().enemy_turn;
+        isPlayerTurn = true;
         //Debug.Log(isPlayerTurn + "from player timer script");
 
         //startPlayerTimer();
@@ -27,7 +30,7 @@ public class Player_Timer1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isPlayerTurn = GameObject.Find("coin").GetComponent<Coin>().player_turn; // sennò non legge la variabile il bastardo
+       // isPlayerTurn = GameObject.Find("coin").GetComponent<Coin>().player_turn; // sennò non legge la variabile il bastardo
                                                                                  // startPlayerTimer();
         if (isPlayerTurn)
         {
@@ -35,7 +38,7 @@ public class Player_Timer1 : MonoBehaviour
             decreaseTimer();
         }
         else {
-            StartCoroutine("WaitYourTurn");
+            waitYourTurnProva();
             
         }
     }
@@ -46,6 +49,19 @@ public class Player_Timer1 : MonoBehaviour
         yield return new WaitForSeconds(10);
         isPlayerTurn = true;
         startPlayerTimer();
+    }
+
+    private void waitYourTurnProva()
+    {
+         timer_stop -= 1 * Time.deltaTime;
+
+         if (timer_stop <= 0)
+        {
+             
+            isPlayerTurn = true;
+            isEnemyTurn = false;
+        }
+
     }
 
     public void startPlayerTimer()
@@ -72,6 +88,7 @@ public class Player_Timer1 : MonoBehaviour
         else if (player_timer_value <= 0)
         {
             player_timer_value = 10;
+            timer_stop = 10;
             player_timer_txt.text = player_timer_str + player_timer_value;
             
             isPlayerTurn = false;
