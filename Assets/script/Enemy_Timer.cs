@@ -70,6 +70,7 @@ public class Enemy_Timer : MonoBehaviour
         {
             enemy_timer_value = 10;
             enemy_timer_txt.text = enemy_timer_str + enemy_timer_value;
+            
             isPlayerTurn = true;
             isEnemyTurn = false;
         }

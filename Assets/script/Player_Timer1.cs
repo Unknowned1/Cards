@@ -73,6 +73,7 @@ public class Player_Timer1 : MonoBehaviour
         {
             player_timer_value = 10;
             player_timer_txt.text = player_timer_str + player_timer_value;
+            
             isPlayerTurn = false;
             isEnemyTurn = true;
         }
