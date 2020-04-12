@@ -260,7 +260,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy_timer_txt: {fileID: 614282057}
+  enemy_timer_str: 
+  enemy_timer_value: 0
   isEnemyTurn: 0
+  isPlayerTurn: 0
 --- !u!114 &614282057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +446,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_timer_txt: {fileID: 851681769}
+  player_timer_str: 
+  player_timer_value: 0
   isPlayerTurn: 0
+  isEnemyTurn: 0
 --- !u!114 &851681769
 MonoBehaviour:
   m_ObjectHideFlags: 0

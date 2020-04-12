@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
 
     public bool isEnemyturn_var;
-    int timer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +25,21 @@ public class Enemy : MonoBehaviour
         {
             IsEnemyTurn();
         }
+        else
+        {
+            StartCoroutine("WaitYourTurn");
+        }
         // if is enemy turn, IsEnemyTurn
     }
 
     public void IsEnemyTurn()
     {
         Debug.Log("Is enemy turn");
+    }
+
+    IEnumerator WaitYourTurn()
+    {
+        yield return new WaitForSeconds(10);
+        IsEnemyTurn();
     }
 }

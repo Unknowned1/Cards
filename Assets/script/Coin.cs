@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
     void Start()
     {
         coin_value = Random.Range(0, 2);
-        Debug.Log(coin_value + " from coin script ");
+        //Debug.Log(coin_value + " from coin script ");
 
         if (coin_value == 0)
         {
@@ -27,9 +27,7 @@ public class Coin : MonoBehaviour
         else {
             Debug.Log("vaffanculo");
         }
-        
     }
-
     // Update is called once per frame
     void Update()
     {

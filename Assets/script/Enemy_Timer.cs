@@ -1,15 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy_Timer : MonoBehaviour
 { 
     public Text enemy_timer_txt;
-    string enemy_timer_str;
-    float enemy_timer_value;
-    public bool isEnemyTurn;
-
+    public string enemy_timer_str;
+    public float enemy_timer_value;
+    public bool isEnemyTurn, isPlayerTurn;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +15,12 @@ public class Enemy_Timer : MonoBehaviour
         enemy_timer_txt = GetComponent<Text>();
         enemy_timer_str = enemy_timer_txt.text;
         enemy_timer_value = 10;
+        enemy_timer_txt.text = enemy_timer_str + (int)enemy_timer_value;
 
         isEnemyTurn = GameObject.Find("coin").GetComponent<Coin>().player_turn;
-        Debug.Log(isEnemyTurn + "from player timer script");
+        isPlayerTurn = GameObject.Find("coin").GetComponent<Coin>().enemy_turn;
 
-        startEnemyTimer();
-
+        //startEnemyTimer();
     }
 
     // Update is called once per frame
@@ -30,22 +28,57 @@ public class Enemy_Timer : MonoBehaviour
     {
         // include an if
         isEnemyTurn = GameObject.Find("coin").GetComponent<Coin>().enemy_turn; // sennò non legge la variabile il bastardo
+        //startEnemyTimer();
+        if (isEnemyTurn)
+        {
+            Debug.Log("enemy timer has started ");
+            decreaseTimer();
+        }
+        else
+        {
+            StartCoroutine("WaitYourTurn");
+            
+        }
+    }
+
+    IEnumerator WaitYourTurn()
+    {
+        
+        yield return new WaitForSeconds(10);
+        isEnemyTurn = true;
         startEnemyTimer();
+        
     }
 
     public void startEnemyTimer()
     {
         if (isEnemyTurn)
         {
-            Debug.Log("player timer has started ");
+            Debug.Log("enemy timer has started ");
             decreaseTimer();
+        }
+        else
+        {
+            StartCoroutine("WaitYourTurn");
         }
     }
 
     public void decreaseTimer()
     {
         // if time < 0 so time = 0
-        enemy_timer_value -= 1 * Time.deltaTime;
-        enemy_timer_txt.text = enemy_timer_str + (int)enemy_timer_value;
+        if (enemy_timer_value > 0 )
+        {
+            enemy_timer_value -= 1 * Time.deltaTime;
+            enemy_timer_txt.text = enemy_timer_str + (int)enemy_timer_value;
+        }
+        if (enemy_timer_value == 0 )
+        {
+            enemy_timer_value = 10;
+            enemy_timer_txt.text = enemy_timer_str + 10;
+            isPlayerTurn = true;
+            isEnemyTurn = false;
+        }
     }
+
+    
 }
