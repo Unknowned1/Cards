@@ -12,7 +12,7 @@ public class timer_handler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        time = 10;
+        time = 180;
         timer = GetComponent<Text>();
         timer_text = timer.text;
         
