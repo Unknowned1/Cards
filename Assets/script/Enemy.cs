@@ -27,9 +27,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isEnemyturn_var = false;
+            
             StartCoroutine("WaitYourTurn");
         }
-        // if is enemy turn, IsEnemyTurn
     }
 
     public void IsEnemyTurn()
